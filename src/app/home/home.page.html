@@ -1,8 +1,5 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>
       Sistema de Pedidos
     </ion-title>
@@ -11,8 +8,7 @@
 
 <ion-content>
     <ion-card class="welcome-card">
-      <ion-img src="/assets/img/tela-inicial.png"></ion-img>
-      
+      <ion-img src="/assets/img/tela-inicial.png"></ion-img>      
     </ion-card>
     <form>
       <ion-item>
@@ -23,7 +19,7 @@
         <ion-label position="stacked">Senha</ion-label>
         <ion-input type="password" ></ion-input>
       </ion-item>
-      <ion-button expand="block">Entrar</ion-button>
+      <ion-button expand="block" (click)="login()">Entrar</ion-button>
     </form>
     <ion-button expand="block" fill="outline">Registrar</ion-button>
 </ion-content>
