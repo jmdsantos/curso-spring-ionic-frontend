@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { Observable} from "rxjs";
+import { Observable, throwError} from "rxjs";
 import { catchError } from 'rxjs/operators';
  
  
@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 export class ErrorInterceptor implements HttpInterceptor{
   
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
-      console.log("Passou no inteceptor");
+        console.log("Passou no inteceptor");
         return next.handle(req)
                 .pipe(
                     catchError(error => {
@@ -17,14 +17,15 @@ export class ErrorInterceptor implements HttpInterceptor{
  
                            errorObj = errorObj.error;
                         }
+                        
                         if(!errorObj.status){
-                            errorObj = JSON.parse(errorObj.error);
+                            errorObj = JSON.parse(errorObj);
                         }
                         
-                        console.log("erro inteceptor");
+                        console.log("erro detectado pelo inteceptor");
                         console.log(errorObj);
                        
-                        return Observable.throw(errorObj);
+                        return throwError(errorObj);
                     })) as any;
     }
   
